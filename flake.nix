@@ -3,8 +3,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     rust-overlay = {
-        url = "github:oxalica/rust-overlay";
-        inputs.nixpkgs.follows = "nixpkgs";
+    	url = "github:oxalica/rust-overlay";
+	inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs = { self, nixpkgs, flake-utils, rust-overlay, ... }:
@@ -13,8 +13,9 @@
       overlays = [ (import rust-overlay) ];
       pkgs = import nixpkgs { inherit system overlays; };
       inputs = with pkgs; [
+            openssl
             pkg-config
-            rust-bin.stable.latest.default
+	    rust-bin.stable.latest.default
           ];
       in {
         packages.default = pkgs.rustPlatform.buildRustPackage {
@@ -25,21 +26,20 @@
           src = pkgs.lib.cleanSource ./.;
 
           cargoLock.lockFile = ./Cargo.lock;
-
-          buildInputs = inputs;
-          nativeBuildInputs = inputs;
+          
+	  buildInputs = inputs;
+	  nativeBuildInputs = inputs;
 
           buildPhase = ''
-                        cargo build --release
+			cargo build --release 
           '';
           installPhase = ''
-                   mkdir -p $out/bin
+		   mkdir -p $out/bin
                    cp code2prompt $out/bin/
-                  '';
+		  '';
         };
         devShells.default = pkgs.mkShell {
           packages = inputs;
         };
       });
 }
-
