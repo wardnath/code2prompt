@@ -20,6 +20,9 @@
         cargo-make
         trunk
         rust-bin.stable.latest.default
+        perl
+        gcc
+        binutils
       ];
     in {
       packages.default = pkgs.rustPlatform.buildRustPackage {
