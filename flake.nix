@@ -13,7 +13,6 @@
       overlays = [ (import rust-overlay) ];
       pkgs = import nixpkgs { inherit system overlays; };
       inputs = with pkgs; [
-            openssl
             pkg-config
 	    rust-bin.stable.latest.default
           ];
