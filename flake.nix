@@ -13,7 +13,11 @@
       overlays = [ (import rust-overlay) ];
       pkgs = import nixpkgs { inherit system overlays; };
       inputs = with pkgs; [
+	    openssl
             pkg-config
+            cacert
+            cargo-make
+            trunk
 	    rust-bin.stable.latest.default
           ];
       in {
@@ -26,7 +30,7 @@
 
           cargoLock.lockFile = ./Cargo.lock;
           
-	  buildInputs = inputs;
+	  #buildInputs = inputs;
 	  nativeBuildInputs = inputs;
 
           buildPhase = ''
