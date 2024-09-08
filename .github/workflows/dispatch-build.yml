@@ -3,7 +3,7 @@ name: Dispatch Build
 env:
   PROJECT_NAME: code2prompt
   PROJECT_DESC: "A command-line tool to generate an LLM prompt from codebases of any size, fast."
-  PROJECT_AUTH: "mufeedvh"
+  PROJECT_AUTH: "wardnath"
 
 on:
   workflow_dispatch:
